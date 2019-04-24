@@ -5,7 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.ordersystem.study.domain.item.Item;
+import com.ordersystem.study.domain.order.Order;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -27,10 +32,13 @@ public class OrderItem {
 	@Column(name="order_item_id")
 	private Long id;
 	
-	@Column(name="item_id")
-	private Long itemId;
-	@Column(name="order_id")
-	private Long orderId;
+	@ManyToOne
+	@JoinColumn(name="item_id")
+	private Item item;
+	
+	@ManyToOne
+	@JoinColumn(name="order_id")
+	private Order order;
 	
 	private int orderPrice;
 	private int orderCount;
@@ -44,9 +52,9 @@ public class OrderItem {
 	 * @param orderCount 주문 수량
 	 */
 	@Builder
-	public OrderItem(Long itemId, Long orderId, int orderPrice, int orderCount) {
-		this.itemId = itemId;
-		this.orderId = orderId;
+	public OrderItem(Item item, Order order, int orderPrice, int orderCount) {
+		this.item = item;
+		this.order = order;
 		this.orderPrice = orderPrice;
 		this.orderCount = orderCount;
 	}
@@ -58,8 +66,8 @@ public class OrderItem {
 	 */
 	public OrderItemDTO toDTO() {
 		OrderItemDTO dto = new OrderItemDTO();
-		dto.setItemId(this.itemId);
-		dto.setOrderId(this.orderId);
+		dto.setItem(this.item);
+		dto.setOrder(this.order);
 		dto.setOrderPrice(this.orderPrice);
 		dto.setOrderCount(this.orderCount);
 		

@@ -1,6 +1,11 @@
 package com.ordersystem.study.domain.order;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.ordersystem.study.domain.member.Member;
+import com.ordersystem.study.domain.orderitem.OrderItem;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +22,9 @@ import lombok.ToString;
 @NoArgsConstructor
 public class OrderDTO {
 
-	private Long memberId;
+	private Member member;
+	
+	private List<OrderItem> orderItems = new ArrayList<>();
 	
 	private LocalDateTime orderDate;
 	
@@ -31,7 +38,8 @@ public class OrderDTO {
 	 */
 	public Order toEntity() {
 		return Order.builder()
-				.memberId(this.memberId)
+				.member(this.member)
+				.orderItems(this.orderItems)
 				.orderDate(this.orderDate)
 				.status(this.status)
 				.build();

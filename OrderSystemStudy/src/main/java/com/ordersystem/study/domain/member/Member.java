@@ -1,10 +1,16 @@
 package com.ordersystem.study.domain.member;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.ordersystem.study.domain.order.Order;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -31,6 +37,9 @@ public class Member {
 	private String street;
 	private String zipcode;
 	
+	@OneToMany(mappedBy="member")
+	private List<Order> orders = new ArrayList<>();
+	
 	/**
 	 * 회원 정보 엔티티 빌더
 	 * @author Johnny
@@ -40,11 +49,12 @@ public class Member {
 	 * @param zipcode 회원 우편번호
 	 */
 	@Builder
-	public Member(String name, String city, String street, String zipcode) {
+	public Member(String name, String city, String street, String zipcode, List<Order> orders) {
 		this.name = name;
 		this.city = city;
 		this.street = street;
 		this.zipcode = zipcode;
+		this.orders = orders;
 	}
 	
 	/**
@@ -58,6 +68,7 @@ public class Member {
 		dto.setCity(this.city);
 		dto.setStreet(this.street);
 		dto.setZipcode(this.zipcode);
+		dto.setOrders(this.orders);
 		
 		return dto;
 	}

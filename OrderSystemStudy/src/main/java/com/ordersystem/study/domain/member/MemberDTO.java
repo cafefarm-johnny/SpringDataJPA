@@ -1,5 +1,10 @@
 package com.ordersystem.study.domain.member;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.ordersystem.study.domain.order.Order;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,6 +26,8 @@ public class MemberDTO {
 	private String street;
 	private String zipcode;
 	
+	private List<Order> orders = new ArrayList<>();
+	
 	
 	/**
 	 * 회원 정보 DTO to 엔티티
@@ -33,6 +40,7 @@ public class MemberDTO {
 				.city(this.city)
 				.street(this.street)
 				.zipcode(this.zipcode)
+				.orders(this.orders)
 				.build();
 	}
 }

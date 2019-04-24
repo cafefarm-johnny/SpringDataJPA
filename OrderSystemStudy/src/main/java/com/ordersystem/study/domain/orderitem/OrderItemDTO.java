@@ -1,5 +1,8 @@
 package com.ordersystem.study.domain.orderitem;
 
+import com.ordersystem.study.domain.item.Item;
+import com.ordersystem.study.domain.order.Order;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,8 +18,8 @@ import lombok.ToString;
 @NoArgsConstructor
 public class OrderItemDTO {
 
-	private Long itemId;
-	private Long orderId;
+	private Item item;
+	private Order order;
 	
 	private int orderPrice;
 	private int orderCount;
@@ -29,8 +32,8 @@ public class OrderItemDTO {
 	 */
 	public OrderItem toEntity() {
 		return OrderItem.builder()
-				.itemId(this.itemId)
-				.orderId(this.orderId)
+				.item(this.item)
+				.order(this.order)
 				.orderPrice(this.orderPrice)
 				.orderCount(this.orderCount)
 				.build();
