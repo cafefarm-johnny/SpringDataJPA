@@ -15,8 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.ordersystem.study.domain.member.Member;
 import com.ordersystem.study.domain.orderitem.OrderItem;
@@ -81,13 +79,16 @@ public class Order {
 	}
 	
 	/**
-	 * 주문 상품 추가
+	 * 연관 관계 편의 메소드 (List add = set)
 	 * @author Johnny
 	 * @param orderItemDTO
 	 */
 	public void addOrderItem(OrderItemDTO orderItemDTO) {
 		this.orderItems.add(orderItemDTO.toEntity());
-		orderItemDTO.setOrder(this);
+		if (orderItemDTO.getOrder() != this)
+		{
+			orderItemDTO.setOrder(this);
+		}
 	}
 	
 	
