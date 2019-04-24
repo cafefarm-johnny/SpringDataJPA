@@ -76,6 +76,8 @@ public class Order {
 		// Member member = new Member();
 		// Order order = new Order();
 		// order.setMember(member); // member -> order, order -> member
+		
+		// !: 연관관계 편의 메소드는 양 쪽의 엔티티에서 모두 작성하면 무한 루프에 빠질 수 있으므로 반드시 한 쪽의 엔티티에만 작성한다.
 	}
 	
 	/**
