@@ -4,6 +4,11 @@ import lombok.NoArgsConstructor;
 
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.ordersystem.study.domain.category.Category;
+
 import lombok.Getter;
 
 import lombok.ToString;
@@ -22,6 +27,8 @@ public class ItemDTO {
 	private int itemPrice;
 	private int itemStockQuantity;
 	
+	List<Category> categories = new ArrayList<>();
+	
 	
 	/**
 	 * 상품 정보 DTO to 엔티티
@@ -33,6 +40,7 @@ public class ItemDTO {
 				.itemName(this.itemName)
 				.itemPrice(this.itemPrice)
 				.itemStockQuantity(this.itemStockQuantity)
+				.categories(this.categories)
 				.build();
 	}
 }

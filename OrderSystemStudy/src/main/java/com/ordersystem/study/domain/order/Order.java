@@ -14,8 +14,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.ordersystem.study.domain.delivery.Delivery;
+import com.ordersystem.study.domain.delivery.DeliveryDTO;
 import com.ordersystem.study.domain.member.Member;
 import com.ordersystem.study.domain.orderitem.OrderItem;
 import com.ordersystem.study.domain.orderitem.OrderItemDTO;
@@ -44,6 +47,10 @@ public class Order {
 	
 	@OneToMany(mappedBy="order")
 	private List<OrderItem> orderItems = new ArrayList<>();
+	
+	@OneToOne
+	@JoinColumn(name="delivery_id")
+	private Delivery delivery;
 	
 	private LocalDateTime orderDate;
 	
@@ -91,6 +98,16 @@ public class Order {
 		{
 			orderItemDTO.setOrder(this);
 		}
+	}
+	
+	/**
+	 * 연관 관계 setter
+	 * @author Johnny
+	 * @param delivery 배송 정보 엔티티
+	 */
+	public void setDelivery(DeliveryDTO deliveryDTO) {
+		this.delivery = deliveryDTO.toEntity();
+		deliveryDTO.setOrder(this);
 	}
 	
 	
